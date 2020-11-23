@@ -7,7 +7,16 @@
 </head>
 <body>
 
-
+<h2>Search</h2>
+<form action="" method="post">
+    <p>
+        {{form.term.label}}<br>
+        {{form.term(size=50)}}
+    </p>
+    <p>
+        {{ form.submit() }}
+    </p>
+</form>
 
 </body>
 </html>
