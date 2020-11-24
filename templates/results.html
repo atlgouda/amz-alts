@@ -1,32 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Search results for "{{ term }}" </h1>
-    <h3>Local Toy Stores</h3>
-    <a href="https://www.clubhousekidandcraft.com/search?q={{ term }}" target=”_blank”>Clubhouse Kid and Craft</a><br>
-    <!-- <img src='https:{{ link }}'></img> -->
-    <div style="display:flex; flex-wrap: wrap">
-        {% for l in linx %}
-            <div>
-                <a href='https://www.clubhousekidandcraft.com/{{ sites[linx.index(l)] }}'>
-                    <img src='https:{{ l }}'></img>
-                    <p style="text-align: center;">{{ alts[linx.index(l)] }}</p>
-                </a>    
-            </div>
-        {% endfor %}
-    </div> 
-    <a href="https://rhensnesttoyshop.com/search?type=product&options%5Bprefix%5D=last&q={{ term }}" target=”_blank”>Rhen's Nest Toy Shop</a><br>
-    <a href="https://www.braveandkindbooks.com/search?q={{ term }}" target=”_blank”>Brave + Kind Books</a><br>
+{% extends "base.html" %}
+{% block title %}Results{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+    h1,
+    h2,
+    h3,
+    h4 {
+        text-align: center;
+    }
 
-    <h3>Local Grocers</h3>
-    <a href="https://garnishandgather.com/store/search?q={{ term }}" target=”_blank”>Garnish and Gather (Delivery / Locally sourced foods)</a><br>
-    <a href="https://www.pointy.com/shops/usa/georgia/atlanta/grant-park-market?query={{ term }}" target=”_blank”>Grant Park Market</a><br>
+    .item {
+        /* justify-content: space-around; */
+        padding: 20px 2px;
+        display: inline-block;
+        align-self: flex-end
+    }
+
+    .store {
+        min-width: 50%;
+        max-width: 80%;
+        background-color: papayawhip;
+        margin: 20px auto;
+        padding: 30px;
+        border-radius: 30px;
+    }
+
+    .store-logo,
+    .item-photo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .desc {
+        text-align: center;
+    }
+
+    .city {
+        padding-top: 15px
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h4>Search results for "{{ term }}" </h4>
+<h3>Local Toy Stores</h3>
+<a href="https://www.clubhousekidandcraft.com/search?q={{ term }}" target=”_blank”>
+    <div class="store">
+        <!-- <h4>Clubhouse Kid and Craft</h4> -->
+        <img class="store-logo" width="200" src="{{url_for('static', filename='clubhouse-logo.png')}}" />
+        <h5 class="city" style="text-align: center; color: black">Decatur, GA</h5>
+    </div>
+</a><br>
+<div class="container"">
+    <div class=" row">
+    {% for l in linx %}
+    <div class="col item">
+        <a href='https://www.clubhousekidandcraft.com/{{ sites[linx.index(l)] }}'>
+            <img class="item-photo" src='https:{{ l }}' width=175></img>
+            <div class="desc">{{ alts[linx.index(l)] }}</div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<!-- Rhens Nest -->
+
+<a href="https://rhensnesttoyshop.com/search?type=product&options%5Bprefix%5D=last&q={{ term }}" target=”_blank”>
+    <div class="store">
+        <img class="store-logo" height=200 src="{{url_for('static', filename='rhens-nest-logo.png')}}" />
+        <h5 class="city" style="text-align: center; color: black">Atlanta, GA</h5>
+    </div>
+</a><br>
+<div class="container">
+    <div class=" row">
+    {% for l in rnlinx %}
+    <div class="col item">
+        <!-- insert anchor and description -->
+        <img class="item-photo" src='https:{{ l }}540x.jpg' width="175"></img>
+        <div class="desc">{{ rnalts[rnlinx.index(l)] }}</div>
+    </div>
+    {% endfor %}
+</div>
+</div>
 
 
-</body>
-</html>
+<a href="https://www.braveandkindbooks.com/search?q={{ term }}" target=”_blank”>Brave + Kind Books</a><br>
+
+<h3>Local Grocers</h3>
+<a href="https://garnishandgather.com/store/search?q={{ term }}" target=”_blank”>Garnish and Gather (Delivery /
+    Locally
+    sourced foods)</a><br>
+<a href="https://www.pointy.com/shops/usa/georgia/atlanta/grant-park-market?query={{ term }}" target=”_blank”>Grant
+    Park
+    Market</a><br>
+
+{% endblock content %}
