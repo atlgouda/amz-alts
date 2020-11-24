@@ -6,15 +6,26 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Search results for {{ term }} </h1>
+    <h1>Search results for "{{ term }}" </h1>
     <h3>Local Toy Stores</h3>
-    <a href="https://www.clubhousekidandcraft.com/search?q={{ term }}">Clubhouse Kid and Craft</a><br>
-    <a href="https://rhensnesttoyshop.com/search?type=product&options%5Bprefix%5D=last&q={{ term }}">Rhen's Nest Toy Shop</a><br>
-    <a href="https://www.braveandkindbooks.com/search?q={{ term }}">Brave + Kind Books</a><br>
+    <a href="https://www.clubhousekidandcraft.com/search?q={{ term }}" target=”_blank”>Clubhouse Kid and Craft</a><br>
+    <!-- <img src='https:{{ link }}'></img> -->
+    <div style="display:flex; flex-wrap: wrap">
+        {% for l in linx %}
+            <div>
+                <a href='https://www.clubhousekidandcraft.com/{{ sites[linx.index(l)] }}'>
+                    <img src='https:{{ l }}'></img>
+                    <p style="text-align: center;">{{ alts[linx.index(l)] }}</p>
+                </a>    
+            </div>
+        {% endfor %}
+    </div> 
+    <a href="https://rhensnesttoyshop.com/search?type=product&options%5Bprefix%5D=last&q={{ term }}" target=”_blank”>Rhen's Nest Toy Shop</a><br>
+    <a href="https://www.braveandkindbooks.com/search?q={{ term }}" target=”_blank”>Brave + Kind Books</a><br>
 
     <h3>Local Grocers</h3>
-    <a href="https://garnishandgather.com/store/search?q={{ term }}">Garnish and Gather (Delivery / Locally sourced foods)</a><br>
-    <a href="https://www.pointy.com/shops/usa/georgia/atlanta/grant-park-market?query={{ term }}">Grant Park Market</a><br>
+    <a href="https://garnishandgather.com/store/search?q={{ term }}" target=”_blank”>Garnish and Gather (Delivery / Locally sourced foods)</a><br>
+    <a href="https://www.pointy.com/shops/usa/georgia/atlanta/grant-park-market?query={{ term }}" target=”_blank”>Grant Park Market</a><br>
 
 
 </body>
