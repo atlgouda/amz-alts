@@ -78,17 +78,39 @@
     <div class=" row">
     {% for obj in rItemList %}
     <div class="col item">
-        <a href='https://rhensnesttoyshop.com/{{ obj.rLink }}'>
+        <a href='https://rhensnesttoyshop.com/{{ obj.rLink }}' target=”_blank”>
         <img class="item-photo" src='https:{{ obj.rImg }}' width="175"></img>
         <div class="desc">{{ obj.rTitle }}</div>
+        </a>
         <div class="price">{{ obj.rPrice }}</div>
+
     </div>
     {% endfor %}
 </div>
 </div>
 
 
-<a href="https://www.braveandkindbooks.com/search?q={{ term }}" target=”_blank”>Brave + Kind Books</a><br>
+<a href="https://www.braveandkindbooks.com/search?q={{ term }}" target=”_blank”>
+    <div class="store">
+        <img class="store-logo" height=150 src="{{url_for('static', filename='brave-logo.png')}}" />
+        <h5 class="city" style="text-align: center; color: black">Decatur, GA</h5>
+    </div>
+</a><br>
+<div class="container">
+    <div class=" row">
+    {% for obj in bkItemList %}
+    <div class="col item">
+        <a href='https://www.braveandkindbooks.com{{ obj.bkLink }}' target=”_blank”>
+        <img class="item-photo" src='https:{{ obj.bkImg }}' width="175"></img>
+        <div class="desc">{{ obj.bkTitle }}</div>
+        </a>
+        <div class="price">{{ obj.bkPrice }}</div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+
 <a href = "https://babyloveatlanta.com/search?q={{ term }}" target=”_blank”>Baby Love</a><br>
 <a href = "https://kazootoysatlanta.com/?s={{ term }}&post_type=product&type_aws=true&aws_id=1&aws_filter=1" target=”_blank”>Kazoo Toys</a><br>
 <a href="http://search.store.yahoo.net/yhst-67380419885148/cgi-bin/nsearch?catalog=yhst-67380419885148&query={{ term }}&searchsubmit=Go&vwcatalog=yhst-67380419885148&.autodone=http://www.richardsvarietystore.com/" target=”_blank”>

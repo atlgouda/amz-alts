@@ -65,52 +65,50 @@ def results(term):
             link = t.find("a", {"product-block__title-link"})['href']
             price = t.find("span", {"class": "theme-money"}).text
             rItemList.append( rItem(img, name, link, price))
-    for obj in rItemList:
-        print(obj.rImg)
-        print(obj.rTitle)
-        print(obj.rLink)
-        print(obj.rPrice)
-    # print(testinfo[0])        
+    # for obj in rItemList:
+    #     print(obj.rImg)
+    #     print(obj.rTitle)
+    #     print(obj.rLink)
+    #     print(obj.rPrice)
+
+    # BRAVE + KIND
+    class bkItem():
+        def __init__(self, bkImg, bkTitle, bkLink, bkPrice):
+            self.bkImg = bkImg
+            self.bkTitle = bkTitle
+            self.bkLink = bkLink
+            self.bkPrice = bkPrice
+        
+    bkItemList = []
+    bksource = requests.get('https://www.braveandkindbooks.com/search?q={}'.format(term)).text
+    bksoup = BeautifulSoup(bksource, "html.parser")
+
+    Html_file = open("raw.html", "w")
+    Html_file.write(str(bksoup))
+    Html_file.close()
+
+    bkitemcard = bksoup.findAll("li", {"class": "list-view-item"})
+    if len(bkitemcard) > 0:
+        for item in bkitemcard:
+            bkimage = item.find("img")
+            if bkimage is None:
+                continue
+            else:
+                bkimagesrc = bkimage['src']
+                img = bkimagesrc.split("?v=")[0]
+                name = item.find("div", {"class": "list-view-item__title"}).text
+                link = item.find("a", {"class": "full-width-link"})['href']
+                pricetest = item.find("span", {"class": "price-item--sale"})
+                if pricetest is not None:
+                    price = pricetest.text
+                elif item.find("div", {"class": "list-view-item__sold-out"}) is not None:
+                    price="Sold Out"
+                else:
+                    price=""
+                bkItemList.append( bkItem(img, name, link, price))
 
 
-    # for test in testinfo:
-    #     print(test)
-    # rnthumbnails = rnsoup.findAll("img", {"class":"rimage__image"})
-    # for image in rnthumbnails:
-    #     n = str(image).split("image\" src=\"")
-    #     if len(n) >1:
-    #         link = n[1].split("?v=")[0]
-    #         # print (link)
-    #         rnlinx.append(link)
-            # print(len(rnlinx))
-        # print(image)
-        # imgs = t.findAll("img")
-        # print(imgs)
-        # if len(imgs)> 0:
-        #     for image in imgs:
-                # n = str(image).split("data-src=\"")
-                # y = str(n).split("x.png?")
-                # if len(y) > 1:
-                #     link = n[1].split("{width}x.png")[0]
-                #     rnlinx.append(link)
-                #     print("PLAYMOBIL SUPERSET")
-                # if len(n)>1:
-                #     link = n[1].split("{width}x.jpg")[0]
-                #     rnlinx.append(link)
-                    # print(rnlinx)
-        # rntitles = rnsoup.findAll("div", {"class":"product-block__title"})
-        # for title in rntitles:
-        #     if len(title)>0:
-        #         x = str(title).split("ss=r\">")[1]
-        #         rnalt = str(x).split("</a>")[0]
-        #         rnalts.append(rnalt)
-
-    # print('RHENS NEST')
-    # print(rnsource)
-    # Html_file = open("raw.html", "w")
-    # Html_file.write(str(rnthumbnails))
-    # Html_file.close()
     return render_template('results.html', term=term, thumbnails=thumbnails, 
             linx=linx, alts=alts, sites=sites,
-            rItemList=rItemList
+            rItemList=rItemList, bkItemList=bkItemList
             )
