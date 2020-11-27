@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, send_from_directory
 import requests
 from forms import SearchForm
 from bs4 import BeautifulSoup
@@ -28,3 +28,8 @@ def results(term):
             rItemList=rItemList, bkItemList=bkItemList,
             blItemList=blItemList, kzItemList = kzItemList, chItemList=chItemList
             )
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                          'favicon.ico',mimetype='image/vnd.microsoft.icon')
