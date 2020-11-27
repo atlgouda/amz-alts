@@ -27,7 +27,8 @@ def clubhouse(term):
                 link = "https://www.clubhousekidandcraft.com" + t.find("a")['href']
                 price = t.find("span", {"itemprop": "price"}).text.strip()
                 chItemList.append( chItem(img, name, link, price))
-        chItemList.pop(0)
+        if chItemList:
+            chItemList.pop(0)
     # Html_file = open("raw.html", "w")
     # Html_file.write(str(thumbnails))
     # Html_file.close()
