@@ -1,9 +1,10 @@
 from flask import Flask, render_template, redirect, request, url_for, send_from_directory
-import requests
 from forms import SearchForm
 from bs4 import BeautifulSoup
 import sys
+import os
 from stores import clubhouse, chItemList, rhens, rItemList, bkItemList, brave, blItemList, babyLove, scrapeSites, kzItemList, kazoo
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'jlusOUmDgSVJWKOMr3eT'
