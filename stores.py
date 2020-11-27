@@ -3,11 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 import sys
 
-# Clubhouse
-# linx = []
-# alts = []
-# sites= []
-
 chItemList = []
 def clubhouse(term):
     class chItem():
@@ -16,7 +11,6 @@ def clubhouse(term):
             self.chTitle = chTitle
             self.chLink = chLink
             self.chPrice = chPrice
-
     source = requests.get('https://www.clubhousekidandcraft.com/search?q={}'.format(term)).text
     soup = BeautifulSoup(source, "html.parser")
     thumbnails = soup.findAll("div", {"class": "grid"})
@@ -33,25 +27,10 @@ def clubhouse(term):
                 link = "https://www.clubhousekidandcraft.com" + t.find("a")['href']
                 price = t.find("span", {"itemprop": "price"}).text.strip()
                 chItemList.append( chItem(img, name, link, price))
-        # chItemList = chInnerList.sub(chInnerList)
-        # if len(imgs) > 0:
-        #     for image in imgs:
-        #         n = str(image).split(" src=\"")
-        #         if len(n) > 1:
-        #             link = n[1][:-9]
-        #             linx.append(link)
-        #             a = str(image).split("alt=\"")
-        #             alt = str(a).split("\"")[0][11:]
-        #             alts.append(alt)
-        #     anchors = t.findAll("a")
-        #     for anchor in anchors:
-        #         i = str(anchor).split("<a href=\"")
-        #         if len(i) > 1:
-        #             j = str(i[1]).split("\" title=")[0]
-        #             sites.append(j) 
-    Html_file = open("raw.html", "w")
-    Html_file.write(str(thumbnails))
-    Html_file.close()
+        chItemList.pop(0)
+    # Html_file = open("raw.html", "w")
+    # Html_file.write(str(thumbnails))
+    # Html_file.close()
 
 # Rhens Nest
 rItemList = []
@@ -61,8 +40,7 @@ def rhens(term):
             self.rImg = rImg
             self.rTitle = rTitle
             self.rLink = rLink
-            self.rPrice = rPrice
-        
+            self.rPrice = rPrice    
     rnsource = requests.get('https://rhensnesttoyshop.com/search?type=product&options%5Bprefix%5D=last&q={}'.format(term)).text
     rnsoup = BeautifulSoup(rnsource, "html.parser")
     testinfo = rnsoup.findAll("div", {"class":"product-block"})
@@ -72,7 +50,6 @@ def rhens(term):
             testsearch = t.findAll("img", {"class": "rimage__image"})
             n = str(testsearch).split("image\" src=\"")
             if len(n)>1:
-                
                 img = n[1].split("?v=")[0]
                 name = t.find("a", {"class": "product-block__title-link"}).text
                 link = t.find("a", {"product-block__title-link"})['href']
