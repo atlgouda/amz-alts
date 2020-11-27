@@ -8,3 +8,4 @@ Werkzeug==1.0.1
 Flask-WTF
 bs4
 wtforms
+requests
