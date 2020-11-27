@@ -2,16 +2,13 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <div style="margin: auto; max-width: 425px; padding: 50px 5%">
-    <!-- <h5>Support local Atlanta toy stores!</h5> -->
     <div>
         <p style="font-weight: bold; padding-top: 50px">Use this tool to search for products in Atlanta toy stores and support our local businesses!</p>
     </div>
-    <!-- <h4>Search for products in Atlanta toy stores</h4> -->
     <p>*May take up to 20 seconds to fetch results</p>
     <form action="" method="post">
         <p>
-            <!-- {{form.term.label}}<br> -->
-            {{form.term(size=50)}}
+            {{form.term(size=30)}}
         </p>
         <p>
             {{ form.submit() }}

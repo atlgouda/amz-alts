@@ -25,7 +25,6 @@ def results(term):
     # Html_file.close()
 
     return render_template('results.html', term=term,
-            # linx=linx, alts=alts, sites=sites,
             rItemList=rItemList, bkItemList=bkItemList,
             blItemList=blItemList, kzItemList = kzItemList, chItemList=chItemList
             )
