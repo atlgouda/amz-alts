@@ -112,7 +112,11 @@ def babyLove(term):
                 img = blimagesrc.split("?v=")[0]
                 name = item.find("h3", {"class": "card__name"}).text
                 link = item.find("a")['href']
-                price = item.find("div", {"class": "card__price"}).text.strip()
+                priceraw = item.find("div", {"class": "card__price"})
+                if priceraw is None:
+                    price= "No price listed"
+                else:
+                    price = priceraw.text.strip()
                 blItemList.append( blItem(img, name, link, price))
 
 # Kazoo Toys
