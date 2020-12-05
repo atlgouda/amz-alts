@@ -90,34 +90,34 @@ def brave(term):
                 bkItemList.append( bkItem(img, name, link, price))
 
 # Baby Love
-blItemList = []
-def babyLove(term):
-    class blItem():
-            def __init__(self, blImg, blTitle, blLink, blPrice):
-                self.blImg = blImg
-                self.blTitle = blTitle
-                self.blLink = blLink
-                self.blPrice = blPrice
-    blsource = requests.get('https://babyloveatlanta.com/search?q={}'.format(term)).text
-    blsoup = BeautifulSoup(blsource, "html.parser")
-    blitemcard = blsoup.findAll("div", {"class": "card"})
-    blItemList.clear()
-    if len(blitemcard) > 0:
-        for item in blitemcard:
-            blimage = item.findAll("img")[1]
-            if blimage is None:
-                continue
-            else:
-                blimagesrc = blimage['src']
-                img = blimagesrc.split("?v=")[0]
-                name = item.find("h3", {"class": "card__name"}).text
-                link = item.find("a")['href']
-                priceraw = item.find("div", {"class": "card__price"})
-                if priceraw is None:
-                    price= "No price listed"
-                else:
-                    price = priceraw.text.strip()
-                blItemList.append( blItem(img, name, link, price))
+# blItemList = []
+# def babyLove(term):
+#     class blItem():
+#             def __init__(self, blImg, blTitle, blLink, blPrice):
+#                 self.blImg = blImg
+#                 self.blTitle = blTitle
+#                 self.blLink = blLink
+#                 self.blPrice = blPrice
+#     blsource = requests.get('https://babyloveatlanta.com/search?q={}'.format(term)).text
+#     blsoup = BeautifulSoup(blsource, "html.parser")
+#     blitemcard = blsoup.findAll("div", {"class": "card"})
+#     blItemList.clear()
+#     if len(blitemcard) > 0:
+#         for item in blitemcard:
+#             blimage = item.findAll("img")[1]
+#             if blimage is None:
+#                 continue
+#             else:
+#                 blimagesrc = blimage['src']
+#                 img = blimagesrc.split("?v=")[0]
+#                 name = item.find("h3", {"class": "card__name"}).text
+#                 link = item.find("a")['href']
+#                 priceraw = item.find("div", {"class": "card__price"})
+#                 if priceraw is None:
+#                     price= "No price listed"
+#                 else:
+#                     price = priceraw.text.strip()
+#                 blItemList.append( blItem(img, name, link, price))
 
 # Kazoo Toys
 kzItemList = []
@@ -156,6 +156,6 @@ def scrapeSites(term):
     # BRAVE + KIND
     brave(term)
     # Baby Love
-    babyLove(term)
+    # babyLove(term)
     # Kazoo Toys
     kazoo(term)

@@ -3,7 +3,7 @@ from forms import SearchForm
 from bs4 import BeautifulSoup
 import sys
 import os
-from stores import clubhouse, chItemList, rhens, rItemList, bkItemList, brave, blItemList, babyLove, scrapeSites, kzItemList, kazoo
+from stores import clubhouse, chItemList, rhens, rItemList, bkItemList, brave, scrapeSites, kzItemList, kazoo
 
 
 app = Flask(__name__)
@@ -26,7 +26,8 @@ def results(term):
 
     return render_template('results.html', term=term,
             rItemList=rItemList, bkItemList=bkItemList,
-            blItemList=blItemList, kzItemList = kzItemList, chItemList=chItemList
+            # blItemList=blItemList, 
+            kzItemList = kzItemList, chItemList=chItemList
             )
 
 @app.route('/favicon.ico')
